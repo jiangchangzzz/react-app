@@ -30,12 +30,7 @@ module.exports = {
             }
           },
           {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 1,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
-            }
+            loader: 'css-loader'
           },
           {
             loader: 'postcss-loader',
@@ -59,11 +54,6 @@ module.exports = {
           },
           {
             loader: 'css-loader',
-            options: {
-              modules: true,
-              importLoaders: 1,
-              localIdentName: '[name]__[local]___[hash:base64:5]'
-            }
           },
           {
             loader: 'postcss-loader',
@@ -81,7 +71,15 @@ module.exports = {
             }
           }
         ]
-      }
+      },
+      { 
+        test:/\.(png|gif|jpg|jpeg|bmp)$/i, 
+        use:'url-loader?limit=5000' 
+      },
+      { 
+        test:/\.(png|woff|woff2|svg|ttf|eot)($|\?)/i, 
+        use:'url-loader?limit=5000'
+      } 
     ]
   },
 
@@ -103,6 +101,11 @@ module.exports = {
     //打开浏览器插件
     new OpenBrowserPlugin({
       url: 'http://localhost:8080'
+    }),
+
+    //定义为开发环境
+    new webpack.DefinePlugin({
+      __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
     })
   ],
 

@@ -27,17 +27,12 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, path.resolve(__dirname,'app/static/css')],
         use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [
                  {
-                  loader: 'css-loader',
-                  options: {
-                    modules: true,
-                    importLoaders: 1,
-                    localIdentName: '[name]__[local]___[hash:base64:5]'
-                  }
+                  loader: 'css-loader'
                 },
                 {
                   loader: 'postcss-loader',
@@ -57,12 +52,7 @@ module.exports = {
             fallback: 'style-loader',
             use: [
                 {
-                  loader: 'css-loader',
-                  options: {
-                    modules: true,
-                    importLoaders: 1,
-                    localIdentName: '[name]__[local]___[hash:base64:5]'
-                  }
+                  loader: 'css-loader'
                 },
                 {
                     loader: 'postcss-loader',
@@ -75,7 +65,9 @@ module.exports = {
                 'sass-loader'
             ]
         })
-      }
+      },
+      { test:/\.(png|gif|jpg|jpeg|bmp)$/i, loader:'url-loader?limit=5000&name=img/[name].[chunkhash:8].[ext]' },
+      { test:/\.(png|woff|woff2|svg|ttf|eot)($|\?)/i, loader:'url-loader?limit=5000&name=fonts/[name].[ext]'}
     ]
   },
 
