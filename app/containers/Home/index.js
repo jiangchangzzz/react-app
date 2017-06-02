@@ -7,11 +7,15 @@ import Ad from './subpage/Ad';
 import List from './subpage/List';
 
 class Home extends Component {
+    enterKeyword=(newKeyword)=>{
+        this.props.history.push(`/search/${newKeyword}`);
+    };
+
     render() {
         const {userinfo}=this.props;
         return (
             <div>
-                <HomeHeader cityName={userinfo.cityName}/>
+                <HomeHeader cityName={userinfo.cityName} enterKeyword={this.enterKeyword}/>
                 <Carousel/>
                 <div style={{height: '14px'}}></div>
                 <Ad/>

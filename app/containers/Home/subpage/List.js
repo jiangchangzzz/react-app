@@ -4,23 +4,35 @@ import {bindActionCreators} from 'redux';
 
 import * as listActions from '../../../actions/list';
 import HomeList from '../../../components/HomeList';
+import LoadMore from '../../../components/LoadMore';
 import './style.scss';
 
 class List extends Component {
+    constructor(props){
+        super(props);
+
+        this.nextPage=1;
+    }
+
+    loadMore=()=>{
+        this.props.listActions.addList(this.props.cityName,this.nextPage);
+        this.nextPage++;
+    }
+
     componentDidMount(){
-        this.props.listActions.getList('wuhan',1);
+        this.props.listActions.getList(this.props.cityName);
     }
 
     render() {
-        const {data,isFetching,error}=this.props;
-        console.log(this.props);
+        const {data,isFetching,error,hasMore}=this.props;
         return (
             <div className="home-like">
                 <h3 className="home-title">猜你喜欢</h3>
+                <HomeList data={data} />
                 {
-                    isFetching
-                    ? <div>Loading...</div>
-                    : <HomeList data={data.data}/>
+                    hasMore
+                    ? <LoadMore isFetching={isFetching} loadMore={this.loadMore}/>
+                    : ''
                 }
             </div>
         );
@@ -29,7 +41,8 @@ class List extends Component {
 
 const mapStateToProps=(state)=>{
     return {
-        ...state.list
+        ...state.list,
+        cityName: state.userinfo.cityName
     };
 };
 
