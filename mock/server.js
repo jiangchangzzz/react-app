@@ -37,6 +37,37 @@ router.get('/api/list/:city/:page',async (context)=>{
     context.body=data;
 });
 
+//获取搜索页列表数据
+router.get('/api/search/:keyword/:page',async (context)=>{
+    console.log(`search ${context.params.keyword} ${context.params.page}`);
+
+    const data=require('./search/list.js');
+    context.body=data;
+});
+
+//获取详情页店铺信息
+router.get('/api/detail/info/:id',async (context)=>{
+    console.log(`detail info ${context.params.id}`);
+
+    const data=require('./detail/info.js');
+    context.body=data;
+});
+
+//获取详情页评论数据
+router.get('/api/detail/comment/:id',async (context)=>{
+    console.log(`detail comment ${context.params.id}`);
+
+    const data=require('./detail/comment.js');
+    context.body=data;
+});
+
+router.post('/api/login',koaBody,async (context)=>{
+    console.log(`login ${context.request.body}`);
+
+    const data=require('./login/user.js');
+    context.body=data;
+});
+
 app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(3000);

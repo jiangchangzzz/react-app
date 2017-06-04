@@ -1,0 +1,39 @@
+.detail-info{
+    padding: 10px;
+    background-color: #fff;
+
+    .description{
+        margin-top: 20px;
+        line-height: 1.5;
+        color: #999;
+    }
+}
+
+.info-container{
+
+    .info-img{
+        float: left;
+
+        img{
+            width: 130px;
+            height: 100px;
+        }
+    }
+
+    .info-text{
+        margin-left: 150px;
+        line-height: 1.8;
+        
+        .price,.subTitle{
+            color: #999;
+        }
+
+        .star{
+            font-size: 16px;
+        }
+
+        .price{
+            margin-left: 20px;
+        }
+    }
+}

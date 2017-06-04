@@ -1,34 +1,46 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './style.scss';
 
 class LoadMore extends Component {
+    static propTypes={
+        loadMore: PropTypes.func.isRequired
+    };
+
     componentDidMount(){
-        const callback=()=>{
-            const container=this.refs.container;
-            if(container){
-                const top=container.getBoundingClientRect().top;
-                const height=document.documentElement.clientHeight;
-                if(top<height){
-                    this.props.loadMore();
-                }
-            }
-        }
-
         //函数节流
-        let timeoutId=null;
-        window.addEventListener('scroll',()=>{
-            if(this.props.isFetching){
-                return;
-            }
-
-            clearTimeout(timeoutId);
-            timeoutId=setTimeout(callback,500);
-        });
+        this.timeoutId=null;
+        window.addEventListener('scroll',this.handleScroll);
     }    
 
-    componentWilUnmount(){
-        window.removeEventListener('scroll');
+    componentWillUnmount(){
+        window.removeEventListener('scroll',this.handleScroll);
+    }
+
+    handleScroll=()=>{
+        if(this.props.isFetching){
+            return;
+        }
+
+       if(this.timeoutId){
+           return;
+       }
+
+       this.timeoutId=setTimeout(()=>{
+           clearTimeout(this.timeoutId);
+           this.timeoutId=null;
+           this.callback();
+       },500);
+    }
+
+    callback=()=>{
+        const container=this.refs.container;
+        const top=container.getBoundingClientRect().top;
+        const height=document.documentElement.clientHeight;
+        if(top<height){
+            this.props.loadMore();
+        }
     }
 
     render() {

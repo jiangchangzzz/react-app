@@ -1,6 +1,9 @@
 import * as actionTypes from '../constants/userinfo';
 
-const initialState={};
+const initialState={
+    cityName: null,
+    username: null
+};
 
 const userinfo=(state=initialState,action)=>{
     switch(action.type){

@@ -12,10 +12,10 @@ class Home extends Component {
     };
 
     render() {
-        const {userinfo}=this.props;
+        const {userinfo,history}=this.props;
         return (
             <div>
-                <HomeHeader cityName={userinfo.cityName} enterKeyword={this.enterKeyword}/>
+                <HomeHeader cityName={userinfo.cityName} history={history}/>
                 <Carousel/>
                 <div style={{height: '14px'}}></div>
                 <Ad/>
