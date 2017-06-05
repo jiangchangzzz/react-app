@@ -6,3 +6,9 @@ export const update=(payload)=>{
         payload
     };
 };
+
+export const logout=()=>{
+    return {
+        type: actionTypes.LOGOUT_USERINFO
+    };
+};

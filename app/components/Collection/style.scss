@@ -1,0 +1,17 @@
+.collection{
+    background-color: #fff;
+    padding: 10px 80px;
+
+    .collection-add,.collection-buy{
+        padding: 8px 16px;
+        background-color: #E70037;
+        color: #fff;
+        font-size: 16px;
+        border: 0;
+        border-radius: 4px;
+    }
+
+    .collection-buy{
+        float: right;
+    }
+}

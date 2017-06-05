@@ -57,8 +57,8 @@ const mapStateToProps=(state)=>{
 const mapDispatchToProps=(dispatch)=>{
     return {
         searchActions: bindActionCreators(searchActions,dispatch)
-    }
-}
+    };
+};
 
 export default connect(
     mapStateToProps,

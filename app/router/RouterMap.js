@@ -30,7 +30,7 @@ class RouterMap extends Component{
                             <Route path="/login" component={Login}/>
                             <Route path="/register" component={Register}/>
                             <Route path="/forget" component={Forget}/>
-                            <PrivateRoute path="/user" component={User}/>
+                            <PrivateRoute path="/user" redirect="/login" component={User}/>
                             <Route component={NotFound}/>
                         </Switch>
                 </Router>

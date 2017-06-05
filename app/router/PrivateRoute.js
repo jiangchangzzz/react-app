@@ -4,13 +4,13 @@ import {Route,Redirect} from 'react-router-dom';
 
 class PrivateRoute extends Component {
     render() {
-        const {component: Component,userinfo,...rest}=this.props;
+        const {component: Component,userinfo,redirect,...rest}=this.props;
         return (
             <Route {...rest} render={(props)=>(
                 userinfo.username
                 ? <Component {...props}/>
                 : <Redirect to={{
-                    pathname: '/login',
+                    pathname: redirect,
                     state: {from: props.location}
                 }}/>
             )}/>
